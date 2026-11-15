@@ -1,20 +1,19 @@
 /* ===== Controlador general de la sección de juegos y sonido ===== */
-const col = { rover: false, det: false, quiz: false };
+const col = { rover: false, det: false, quiz: false, puz: false };
 let cur = null,
     AC = null,
-    LITE = !window.THREE,
     GLB = "",
     lastLauncher = null,
     master = null,
     sndMuted = false;
 
-const GAME_KEYS = { rover: "game1", det: "game2", quiz: "game3" };
+const GAME_KEYS = { rover: "game1", det: "game2", quiz: "game3", puz: "game4" };
 const tituloJuego = (g) => (GAME_KEYS[g] ? t(GAME_KEYS[g]) : t("gameModalTitle"));
 
 document.body.appendChild($("gm"));
 
 function upd() {
-  $("col").textContent = `${t("collection")} 🚙 ${col.rover ? "✅" : "⬜"}   🔎 ${col.det ? "✅" : "⬜"}   🧠 ${col.quiz ? "✅" : "⬜"}`;
+  $("col").textContent = `${t("collection")} 🚙 ${col.rover ? "✅" : "⬜"}   🔎 ${col.det ? "✅" : "⬜"}   🧠 ${col.quiz ? "✅" : "⬜"}   🧩 ${col.puz ? "✅" : "⬜"}`;
 }
 
 function leave() {
@@ -43,6 +42,7 @@ function launch(game) {
   document.body.classList.add("game-open");
   if (game === "rover") gRover();
   else if (game === "det") gDet();
+  else if (game === "puz") gPuzzle();
   else gQuiz();
   $("game-window").focus();
 }
@@ -240,25 +240,12 @@ document.addEventListener("click", e => {
   if (e.target.closest('a[href^="#"], .go')) bp(540);
 });
 
-function lt() {
-  $("lite").textContent = `${t("modePrefix")} ${LITE ? (LANG === "en" ? "light (2D)" : "ligero (2D)") : "3D"}`;
-}
-
-$("lite").onclick = () => {
-  if (window.THREE) {
-    LITE = !LITE;
-    lt();
-  }
-};
-lt();
-
 /* Al cambiar de idioma: refrescar textos de la sección y relanzar el juego abierto */
 const __langBase = window.__onLangChange;
 window.__onLangChange = function () {
   if (__langBase) __langBase();
   upd();
   renderSound();
-  lt();
   const titulo = TITULOS_EL();
   if (titulo) titulo.textContent = tituloJuego(curGame);
   if (!$("gm").hidden && curGame && typeof curGame === "string") {

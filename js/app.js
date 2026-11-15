@@ -199,7 +199,12 @@ function renderMedia() {
 }
 
 function renderCred() {
-  $("cred").innerHTML = D().H.map(m => `<li>${m.n}: ${m.cred}</li>`).join("");
+  const d = D();
+  const heroesCred = d.H.map(m => `<li>${m.n}: ${m.cred}</li>`).join("");
+  const mediaCred = d.MED.map(m => `<li>${m.t}: ${m.cred}</li>`).join("");
+  $("cred").innerHTML = heroesCred;
+  const mediaList = $("cred-media");
+  if (mediaList) mediaList.innerHTML = mediaCred;
 }
 
 /* ===== Navegación SPA ===== */

@@ -99,6 +99,11 @@ var I18N = {
     team: "Equipo",
     teamDesc: "Desarrollado con pasión por el equipo Space Trace.",
     nasaResources: "Recursos de la NASA",
+    mediaResources: "Medios y multimedia",
+    toolsTitle: "Bibliotecas y herramientas",
+    toolsDesc: "Three.js (renderizado 3D del rover y del cohete), Google Fonts (Cinzel y Manrope), Web Speech API (voz de Oppi) y Web Audio API (efectos de sonido).",
+    aiTitle: "Asistencia de inteligencia artificial",
+    aiDesc: "Asistente de IA de TRAE para generación de código, redacción de textos, revisión y depuración. Todo el contenido científico y los datos de las misiones provienen de fuentes oficiales de la NASA.",
     nasaNote: "Todos los recursos provienen de la NASA y se usan con su autorización. Verifica cada dato y crédito en las fuentes oficiales.",
 
     /* Navegación */
@@ -264,6 +269,11 @@ var I18N = {
     team: "Team",
     teamDesc: "Built with passion by the Space Trace team.",
     nasaResources: "NASA resources",
+    mediaResources: "Media and multimedia",
+    toolsTitle: "Libraries and tools",
+    toolsDesc: "Three.js (3D rendering of the rover and rocket), Google Fonts (Cinzel and Manrope), Web Speech API (Oppi's voice) and Web Audio API (sound effects).",
+    aiTitle: "Artificial intelligence assistance",
+    aiDesc: "TRAE AI assistant for code generation, text writing, review and debugging. All scientific content and mission data come from official NASA sources.",
     nasaNote: "All resources come from NASA and are used with authorization. Verify every fact and credit in the official sources.",
 
     brand: "SPACE TRACE-UPRIT",

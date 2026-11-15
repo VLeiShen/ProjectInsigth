@@ -1,4 +1,4 @@
-/* ===== English content (mirrors js/datos.js structure) ===== */
+﻿/* ===== English content (mirrors js/datos.js structure) ===== */
 
 var H_EN = [
   {
@@ -14,12 +14,12 @@ var H_EN = [
     img: "https://images-assets.nasa.gov/image/as11-37-5551/as11-37-5551~medium.jpg",
     imgAlt: "Apollo 11 scientific experiments and astronaut footprints on the lunar surface",
     imgCaption: "Seismic experiment, laser reflector and footprints · AS11-37-5551",
-    source: "https://images.nasa.gov/details-as11-37-5551.html",
+    source: "https://images.nasa.gov/details/as11-37-5551",
     visual: "https://images-assets.nasa.gov/image/as11-40-5927/as11-40-5927~medium.jpg",
     visualAlt: "Apollo 11 lunar module on the surface of the Moon",
     visualLabel: "Lunar module · NASA",
     visualCaption: "The Eagle on the lunar surface · AS11-40-5927",
-    visualSource: "https://images.nasa.gov/details-as11-40-5927.html",
+    visualSource: "https://images.nasa.gov/details/as11-40-5927",
     personInitials: "TK",
     cred: "Images: NASA · Apollo 11"
   },
@@ -35,7 +35,7 @@ var H_EN = [
     img: "https://images-assets.nasa.gov/image/as15-88-11901/as15-88-11901~medium.jpg",
     imgAlt: "Apollo 15 LRV lunar vehicle on the surface of the Moon",
     imgCaption: "LRV at Hadley-Apennine · AS15-88-11901",
-    source: "https://images.nasa.gov/details-as15-88-11901.html",
+    source: "https://images.nasa.gov/details/as15-88-11901",
     visual: "",
     visualLabel: "Key figure · NASA/MSFC",
     personInitials: "FP",
@@ -53,12 +53,12 @@ var H_EN = [
     img: "https://images-assets.nasa.gov/image/PIA04413/PIA04413~medium.jpg",
     imgAlt: "Artist's concept of an exploration rover on the surface of Mars",
     imgCaption: "Artist's concept of a Mars Exploration Rover · PIA04413",
-    source: "https://images.nasa.gov/details-PIA04413.html",
+    source: "https://images.nasa.gov/details/PIA04413",
     visual: "https://images-assets.nasa.gov/image/PIA07314/PIA07314~orig.jpg",
     visualAlt: "Image of Mars captured by the THEMIS camera of Mars Odyssey",
     visualLabel: "Martian archive · NASA/JPL/ASU",
     visualCaption: "THEMIS Images as Art series · PIA07314",
-    visualSource: "https://images.nasa.gov/details-PIA07314.html",
+    visualSource: "https://images.nasa.gov/details/PIA07314",
     personInitials: "SS",
     cred: "NASA/JPL-Caltech/Cornell · Opportunity"
   },
@@ -74,12 +74,12 @@ var H_EN = [
     img: "https://images-assets.nasa.gov/image/PIA24647/PIA24647~orig.jpg",
     imgAlt: "Ingenuity flying over the surface of Mars during its fifth flight",
     imgCaption: "Ingenuity's 5th flight · PIA24647",
-    source: "https://images.nasa.gov/details-PIA24647.html",
+    source: "https://images.nasa.gov/details/PIA24647",
     visual: "https://images-assets.nasa.gov/image/PIA22649/PIA22649~medium.jpg",
     visualAlt: "Ingenuity team at JPL; MiMi Aung holds a replica of the helicopter",
     visualLabel: "Ingenuity team · NASA/JPL",
     visualCaption: "MiMi Aung with the full-scale model · PIA22649",
-    visualSource: "https://images.nasa.gov/details-PIA22649.html",
+    visualSource: "https://images.nasa.gov/details/PIA22649",
     personInitials: "MA",
     cred: "NASA/JPL-Caltech · Ingenuity"
   },
@@ -95,7 +95,7 @@ var H_EN = [
     img: "https://images-assets.nasa.gov/image/PIA17046/PIA17046~medium.jpg",
     imgAlt: "Illustration of Voyager 1 traveling through interstellar space",
     imgCaption: "Artist's concept of Voyager in interstellar space · PIA17046",
-    source: "https://images.nasa.gov/details-PIA17046.html",
+    source: "https://images.nasa.gov/details/PIA17046",
     visual: "",
     visualLabel: "Key figure · Voyager project",
     personInitials: "ES",
@@ -111,7 +111,7 @@ var TL_EN = [
     image: "https://images-assets.nasa.gov/image/as11-40-5927/as11-40-5927~medium.jpg",
     alt: "Apollo 11 Eagle lunar module on the surface of the Moon",
     credit: "NASA · Apollo 11",
-    source: "https://images.nasa.gov/details-as11-40-5927.html"
+    source: "https://images.nasa.gov/details/as11-40-5927"
   },
   {
     year: "1971–1972",
@@ -120,7 +120,7 @@ var TL_EN = [
     image: "https://images-assets.nasa.gov/image/as15-88-11901/as15-88-11901~medium.jpg",
     alt: "Apollo 15 LRV lunar vehicle on the Moon",
     credit: "NASA · Apollo 15",
-    source: "https://images.nasa.gov/details-as15-88-11901.html"
+    source: "https://images.nasa.gov/details/as15-88-11901"
   },
   {
     year: "1977",
@@ -129,7 +129,7 @@ var TL_EN = [
     image: "https://images-assets.nasa.gov/image/PIA17046/PIA17046~medium.jpg",
     alt: "Artist's concept of the Voyager 1 probe in interstellar space",
     credit: "NASA/JPL-Caltech · artist's concept",
-    source: "https://images.nasa.gov/details-PIA17046.html"
+    source: "https://images.nasa.gov/details/PIA17046"
   },
   {
     year: "2004",
@@ -138,7 +138,7 @@ var TL_EN = [
     image: "https://images-assets.nasa.gov/image/PIA04413/PIA04413~medium.jpg",
     alt: "Artist's concept of a Mars Exploration Rover on Mars",
     credit: "NASA/JPL-Caltech · artist's concept",
-    source: "https://images.nasa.gov/details-PIA04413.html"
+    source: "https://images.nasa.gov/details/PIA04413"
   },
   {
     year: "2012",
@@ -147,7 +147,7 @@ var TL_EN = [
     image: "https://images-assets.nasa.gov/image/PIA17046/PIA17046~medium.jpg",
     alt: "Illustration of Voyager 1 moving away from the solar system",
     credit: "NASA/JPL-Caltech · artist's concept",
-    source: "https://images.nasa.gov/details-PIA17046.html"
+    source: "https://images.nasa.gov/details/PIA17046"
   },
   {
     year: "2018",
@@ -156,7 +156,7 @@ var TL_EN = [
     image: "https://images-assets.nasa.gov/image/PIA07314/PIA07314~orig.jpg",
     alt: "View of Mars captured by the THEMIS camera of Mars Odyssey",
     credit: "NASA/JPL-Caltech/ASU · Martian archive",
-    source: "https://images.nasa.gov/details-PIA07314.html"
+    source: "https://images.nasa.gov/details/PIA07314"
   },
   {
     year: "2021",
@@ -165,7 +165,7 @@ var TL_EN = [
     image: "https://images-assets.nasa.gov/image/PIA24647/PIA24647~orig.jpg",
     alt: "The Ingenuity helicopter during its fifth flight on Mars",
     credit: "NASA/JPL-Caltech · flight 5",
-    source: "https://images.nasa.gov/details-PIA24647.html"
+    source: "https://images.nasa.gov/details/PIA24647"
   },
   {
     year: "2024",
@@ -174,7 +174,7 @@ var TL_EN = [
     image: "https://images-assets.nasa.gov/image/PIA24647/PIA24647~orig.jpg",
     alt: "Ingenuity on the surface of Mars",
     credit: "NASA/JPL-Caltech · Ingenuity",
-    source: "https://images.nasa.gov/details-PIA24647.html"
+    source: "https://images.nasa.gov/details/PIA24647"
   }
 ];
 
@@ -186,7 +186,7 @@ var SC_EN = [
     image: "https://images-assets.nasa.gov/image/6900957/6900957~medium.jpg",
     alt: "Buzz Aldrin next to the Apollo 11 experiment package and the lunar laser reflector",
     credit: "NASA · Apollo 11",
-    source: "https://images.nasa.gov/details-6900957.html"
+    source: "https://images.nasa.gov/details/6900957"
   },
   {
     category: "Opportunity · Martian geology",
@@ -195,7 +195,7 @@ var SC_EN = [
     image: "https://images-assets.nasa.gov/image/PIA18885/PIA18885~small.jpg",
     alt: "Close-up of a Martian rock with mineral spherules studied by Opportunity",
     credit: "NASA/JPL-Caltech/Cornell/USGS",
-    source: "https://images.nasa.gov/details-PIA18885.html"
+    source: "https://images.nasa.gov/details/PIA18885"
   },
   {
     category: "Ingenuity · Flight technology",
@@ -204,7 +204,7 @@ var SC_EN = [
     image: "https://images-assets.nasa.gov/image/PIA24647/PIA24647~orig.jpg",
     alt: "Ingenuity during its fifth flight over the surface of Mars",
     credit: "NASA/JPL-Caltech · flight 5",
-    source: "https://images.nasa.gov/details-PIA24647.html"
+    source: "https://images.nasa.gov/details/PIA24647"
   },
   {
     category: "Voyager 1 · Interstellar space",
@@ -213,7 +213,7 @@ var SC_EN = [
     image: "https://images-assets.nasa.gov/image/PIA17046/PIA17046~medium.jpg",
     alt: "Artist's concept of Voyager 1 in interstellar space",
     credit: "NASA/JPL-Caltech · artist's concept",
-    source: "https://images.nasa.gov/details-PIA17046.html"
+    source: "https://images.nasa.gov/details/PIA17046"
   },
   {
     category: "Voyager 1 · Geology of Io",

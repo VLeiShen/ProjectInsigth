@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Archivo Interplanetario: Explorando las máquinas que la NASA dejó atrás y el legado de quienes las crearon.">
+  <meta name="author" content="Equipo Space Trace">
+  <meta name="theme-color" content="#11110f">
+  <title>Space Trace | Abandonados, no olvidados</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2311110f'/%3E%3Cpath d='M16 6l2.6 6.8L25 16l-6.4 3.2L16 26l-2.6-6.8L7 16l6.4-3.2z' fill='%23d7bd7a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Manrope:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/estilos.css?v=41">
+</head>
+<body>
+
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <nav id="nav" aria-label="Navegación principal"></nav>
+
+  <section class="v on" id="v-portada">
+    <div class="hero-copy">
+      <span class="hero-kicker">ARCHIVO INTERPLANETARIO <i></i> VOL. 01</span>
+      <h1>Abandonados,<br>no olvidados</h1>
+      <p>Máquinas que la NASA dejó atrás. Personas que las imaginaron.</p>
+    </div>
+
+    <figure class="hero-image-frame" aria-label="Misiones del archivo Space Trace">
+      <button class="hero-vessel-card" type="button" data-vessel="opportunity" aria-label="Opportunity, rover en Marte, misión MER-B de 2004 a 2018" aria-pressed="false">
+        <img src="img/Naves/Opportuny.jpg" alt="" class="hero-img">
+        <span class="hero-vessel-caption"><b>OPPORTUNITY</b><small>MER-B · MARTE · 2004—2018</small></span>
+      </button>
+      <button class="hero-vessel-card" type="button" data-vessel="lunar-rover" aria-label="Rover lunar, vehículo de Apollo" aria-pressed="false">
+        <img src="img/Naves/RoverL.png" alt="" class="hero-img">
+        <span class="hero-vessel-caption"><b>ROVER LUNAR</b><small>APOLLO · LUNA</small></span>
+      </button>
+      <button class="hero-vessel-card" type="button" data-vessel="apollo" aria-label="Módulo lunar Apollo 11 en la Luna" aria-pressed="false">
+        <img src="img/Naves/Apollo11.jpg" alt="" class="hero-img">
+        <span class="hero-vessel-caption"><b>APOLLO 11</b><small>MÓDULO LUNAR · 1969</small></span>
+      </button>
+      <button class="hero-vessel-card" type="button" data-vessel="ingenuity" aria-label="Ingenuity, helicóptero en Marte" aria-pressed="false">
+        <img src="img/Naves/Ingenuity.png" alt="" class="hero-img">
+        <span class="hero-vessel-caption"><b>INGENUITY</b><small>HELICÓPTERO · MARTE</small></span>
+      </button>
+      <button class="hero-vessel-card" type="button" data-vessel="voyager" aria-label="Sonda Voyager 1 en el espacio interestelar" aria-pressed="false">
+        <img src="img/Naves/Voyager1.png" alt="" class="hero-img">
+        <span class="hero-vessel-caption"><b>VOYAGER 1</b><small>ESPACIO PROFUNDO · 1977</small></span>
+      </button>
+    </figure>
+
+    <div class="hero-message">
+      <svg class="atom" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <g class="atom-orbit orbit-one">
+          <g transform="rotate(0 32 32)">
+            <ellipse cx="32" cy="32" rx="27" ry="10"></ellipse>
+            <circle cx="59" cy="32" r="2.5"></circle>
+          </g>
+        </g>
+        <g class="atom-orbit orbit-two">
+          <g transform="rotate(60 32 32)">
+            <ellipse cx="32" cy="32" rx="27" ry="10"></ellipse>
+            <circle cx="59" cy="32" r="2.5"></circle>
+          </g>
+        </g>
+        <g class="atom-orbit orbit-three">
+          <g transform="rotate(120 32 32)">
+            <ellipse cx="32" cy="32" rx="27" ry="10"></ellipse>
+            <circle cx="59" cy="32" r="2.5"></circle>
+          </g>
+        </g>
+        <circle class="atom-core" cx="32" cy="32" r="3.5"></circle>
+      </svg>
+      <p>Aunque ya no respondan, sus descubrimientos siguen hablando.</p>
+    </div>
+
+    <div class="hero-actions">
+      <p class="blink">SEÑAL RECIBIDA · MISIÓN DISPONIBLE</p>
+      <button class="go" id="start">Comenzar exploración</button>
+      <div class="exploration-progress" aria-label="Progreso de exploración">
+        <div class="exploration-progress-heading">
+          <span>BITÁCORA DE EXPLORACIÓN</span>
+          <strong id="exploration-count" aria-live="polite">0/5 archivos</strong>
+        </div>
+        <progress id="exploration-meter" max="5" value="0" aria-label="Archivos explorados"></progress>
+        <ol class="exploration-steps">
+          <li data-explore-step="heroes">Héroes</li>
+          <li data-explore-step="tiempo">Tiempo</li>
+          <li data-explore-step="ciencia">Ciencia</li>
+          <li data-explore-step="medios">Señales</li>
+          <li data-explore-step="juego">Desafíos</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="v" id="v-heroes">
+    <div class="heroes-list">
+      <header class="heroes-heading">
+        <h2>Nuestros héroes</h2>
+        <p class="muted">Cada misión y las personas que la hicieron posible.</p>
+      </header>
+      <div id="heroes"></div>
+    </div>
+    <aside id="hero-detail" class="hero-detail" aria-label="Detalle del héroe seleccionado" aria-live="polite">
+      <div class="hero-detail-empty">
+        <span aria-hidden="true">✦</span>
+        <p>Selecciona una misión para conocer su historia.</p>
+      </div>
+    </aside>
+  </section>
+
+  <section class="v" id="v-tiempo">
+    <header class="section-heading">
+      <span class="section-kicker">REGISTRO CRONOLÓGICO · 01</span>
+      <h2>Línea de tiempo</h2>
+      <p class="muted">Momentos que cambiaron nuestra forma de mirar otros mundos.</p>
+    </header>
+    <ul class="tl" id="tl" tabindex="0" aria-label="Recorrido horizontal por los hitos espaciales"></ul>
+  </section>
+
+  <section class="v" id="v-ciencia">
+    <header class="section-heading">
+      <span class="section-kicker">HALLAZGOS · 02</span>
+      <h2>La ciencia que dejaron</h2>
+      <p class="muted">Seis hallazgos que transformaron nuestra comprensión de la Luna, Marte y el espacio profundo.</p>
+    </header>
+    <div id="sci"></div>
+  </section>
+
+  <section class="v" id="v-medios">
+    <header class="section-heading">
+      <span class="section-kicker">SEÑALES RECUPERADAS · 03</span>
+      <h2>Videos y sonidos</h2>
+    </header>
+    <p class="muted">Fragmentos de archivo del catálogo de la NASA: videos y audios de las misiones que siguen enviando señales.</p>
+    <div id="media"></div>
+  </section>
+
+  <section class="v" id="v-juego">
+    <header class="section-heading">
+      <span class="section-kicker">SIMULADOR DE MISIÓN · 04</span>
+      <h2>Elige tu misión</h2>
+      <p class="muted">Tres desafíos. Un pequeño paso para tu colección.</p>
+    </header>
+    <div id="menu">
+      <article class="card game-choice" data-rv style="--i:0">
+        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="4" y="9.5" width="16" height="6.5" rx="2"/><circle cx="8.5" cy="18.5" r="1.8"/><circle cx="15.5" cy="18.5" r="1.8"/><path d="M12 9.5V6m-3.5 0h7"/></svg></span>
+        <h3>Rescata al rover</h3>
+        <p>Salva a Opportunity de la tormenta de polvo.</p>
+        <button class="btn g" data-g="rover">Iniciar misión <span aria-hidden="true">↗</span></button>
+      </article>
+      <article class="card game-choice" data-rv style="--i:1">
+        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.6-4.6"/></svg></span>
+        <h3>Detective espacial</h3>
+        <p>Encuentra lo que quedó abandonado en la Luna.</p>
+        <button class="btn g" data-g="det">Iniciar misión <span aria-hidden="true">↗</span></button>
+      </article>
+      <article class="card game-choice" data-rv style="--i:2">
+        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3a6 6 0 0 1 4 10.5V16H8v-2.5A6 6 0 0 1 12 3Z"/><path d="M9.5 19h5M10.5 22h3"/></svg></span>
+        <h3>Mini-quiz espacial</h3>
+        <p>Demuestra cuánto sabes de las misiones.</p>
+        <button class="btn g" data-g="quiz">Iniciar misión <span aria-hidden="true">↗</span></button>
+      </article>
+      <button class="chip" id="lite">Modo: 3D</button>
+      <p id="col" class="muted"></p>
+    </div>
+    <div id="gm" class="game-modal" hidden aria-hidden="true">
+      <section class="game-window" id="game-window" role="dialog" aria-modal="true" aria-labelledby="game-title" tabindex="-1">
+        <header class="game-window-header">
+          <div>
+            <span class="game-window-kicker">SIMULADOR DE MISIÓN</span>
+            <h3 id="game-title">Misión</h3>
+          </div>
+          <button class="game-close" id="game-close" type="button" aria-label="Cerrar juego">×</button>
+        </header>
+        <div class="game-window-body" id="gbody"></div>
+        <footer class="game-window-footer">
+          <button class="chip" id="back" type="button">← Volver a misiones</button>
+        </footer>
+      </section>
+    </div>
+  </section>
+
+  <section class="v" id="v-creditos">
+    <header class="section-heading">
+      <span class="section-kicker">FUENTES Y AGRADECIMIENTOS · 05</span>
+      <h2>Créditos</h2>
+    </header>
+    <div class="card">
+      <b>Equipo</b>
+      <p class="muted">Desarrollado con pasión por el equipo Space Trace.</p>
+    </div>
+    <div class="card">
+      <b>Recursos de la NASA</b>
+      <ul id="cred"></ul>
+      <p class="cap">Todos los recursos provienen de la NASA y se usan con su autorización. Verifica cada dato y crédito en las fuentes oficiales.</p>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="js/datos.js?v=8"></script>
+  <script src="js/app.js?v=13"></script>
+  <script src="js/fondo.js?v=1"></script>
+  <script src="js/juego-rover.js"></script>
+  <script src="js/juego-detective.js?v=3"></script>
+  <script src="js/juego-quiz.js?v=1"></script>
+  <script src="js/juego-main.js?v=6"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Vínculos y metadatos locales
+.vercel/
+.vscode/
+.trae/
+
+# Sistema operativo
+Thumbs.db
+Desktop.ini
+.DS_Store

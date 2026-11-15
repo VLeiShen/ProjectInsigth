@@ -8,12 +8,13 @@ let cur = null,
     master = null,
     sndMuted = false;
 
-const TITULOS = { rover: "Rescata al rover", det: "Detective espacial", quiz: "Mini-quiz espacial" };
+const GAME_KEYS = { rover: "game1", det: "game2", quiz: "game3" };
+const tituloJuego = (g) => (GAME_KEYS[g] ? t(GAME_KEYS[g]) : t("gameModalTitle"));
 
 document.body.appendChild($("gm"));
 
 function upd() {
-  $("col").textContent = `Mi colección: 🚙 ${col.rover ? "✅" : "⬜"}   🔎 ${col.det ? "✅" : "⬜"}   🧠 ${col.quiz ? "✅" : "⬜"}`;
+  $("col").textContent = `${t("collection")} 🚙 ${col.rover ? "✅" : "⬜"}   🔎 ${col.det ? "✅" : "⬜"}   🧠 ${col.quiz ? "✅" : "⬜"}`;
 }
 
 function leave() {
@@ -21,6 +22,7 @@ function leave() {
     cur();
     cur = null;
   }
+  curGame = null;
   document.onkeydown = null;
   $("gm").hidden = true;
   $("gm").setAttribute("aria-hidden", "true");
@@ -30,19 +32,25 @@ function leave() {
   if (lastLauncher && location.hash === "#juego") lastLauncher.focus();
 }
 
+let curGame = null;
+
+function launch(game) {
+  curGame = game;
+  $("game-title").textContent = tituloJuego(game);
+  $("menu").hidden = true;
+  $("gm").hidden = false;
+  $("gm").setAttribute("aria-hidden", "false");
+  document.body.classList.add("game-open");
+  if (game === "rover") gRover();
+  else if (game === "det") gDet();
+  else gQuiz();
+  $("game-window").focus();
+}
+
 document.querySelectorAll(".g").forEach(b => {
   b.onclick = () => {
     lastLauncher = b;
-    const game = b.dataset.g;
-    $("game-title").textContent = TITULOS[game] || "Misión";
-    $("menu").hidden = true;
-    $("gm").hidden = false;
-    $("gm").setAttribute("aria-hidden", "false");
-    document.body.classList.add("game-open");
-    if (game === "rover") gRover();
-    else if (game === "det") gDet();
-    else gQuiz();
-    $("game-window").focus();
+    launch(b.dataset.g);
   };
 });
 
@@ -178,14 +186,15 @@ document.body.appendChild(sndBtn);
 function renderSound() {
   sndBtn.querySelector("svg").innerHTML = sndMuted ? SND_SVG.off : SND_SVG.on;
   sndBtn.setAttribute("aria-pressed", sndMuted ? "true" : "false");
-  sndBtn.setAttribute("aria-label", sndMuted ? "Activar sonido y música" : "Silenciar sonido y música");
-  sndBtn.title = sndMuted ? "Activar sonido" : "Silenciar sonido";
+  sndBtn.setAttribute("aria-label", sndMuted ? t("soundOn") : t("soundOff"));
+  sndBtn.title = sndMuted ? t("soundOnShort") : t("soundOffShort");
 }
 
 sndBtn.onclick = () => {
   sndMuted = !sndMuted;
   try { window.localStorage.setItem(SND_KEY, sndMuted ? "off" : "on"); } catch (e) {}
   if (master) master.gain.value = sndMuted ? 0 : 1;
+  OppiVoice.setEnabled(!sndMuted);
   if (sndMuted) {
     if (bgAudio) bgAudio.muted = true;
     stopAmbient();
@@ -197,6 +206,7 @@ sndBtn.onclick = () => {
   renderSound();
 };
 renderSound();
+OppiVoice.setEnabled(!sndMuted);
 
 /* La música solo arranca tras el primer gesto del usuario. */
 let sndReady = false;
@@ -231,7 +241,7 @@ document.addEventListener("click", e => {
 });
 
 function lt() {
-  $("lite").textContent = `Modo: ${LITE ? "ligero (2D)" : "3D"}`;
+  $("lite").textContent = `${t("modePrefix")} ${LITE ? (LANG === "en" ? "light (2D)" : "ligero (2D)") : "3D"}`;
 }
 
 $("lite").onclick = () => {
@@ -241,3 +251,20 @@ $("lite").onclick = () => {
   }
 };
 lt();
+
+/* Al cambiar de idioma: refrescar textos de la sección y relanzar el juego abierto */
+const __langBase = window.__onLangChange;
+window.__onLangChange = function () {
+  if (__langBase) __langBase();
+  upd();
+  renderSound();
+  lt();
+  const titulo = TITULOS_EL();
+  if (titulo) titulo.textContent = tituloJuego(curGame);
+  if (!$("gm").hidden && curGame && typeof curGame === "string") {
+    const abierto = curGame;
+    leave();
+    launch(abierto);
+  }
+};
+function TITULOS_EL() { return document.getElementById("game-title"); }

@@ -337,3 +337,47 @@ var MED = [
     cred: "Crédito: NASA — Voyager Golden Record (abre en SoundCloud)"
   }
 ];
+
+/* DETECTIVE: objetos escondidos en la Luna */
+var DET = [
+  {
+    n: "Etapa de descenso del módulo lunar",
+    d: "La parte inferior del módulo con el que Apollo 11 aterrizó.",
+    c: "Thomas J. Kelly, ingeniero jefe en Grumman.",
+    h: "Sirvió de plataforma de aterrizaje y quedó en la Luna.",
+    x: 70,
+    y: 190
+  },
+  {
+    n: "Reflector láser",
+    d: "Un espejo especial que devuelve la luz hacia donde vino.",
+    c: "Un equipo científico de Apollo (nombre por confirmar).",
+    h: "Desde la Tierra se le apunta con láser para medir la distancia a la Luna.",
+    x: 310,
+    y: 175
+  },
+  {
+    n: "Rover lunar",
+    d: "Un coche eléctrico para astronautas.",
+    c: "Ferenc Pavlics, ingeniero de General Motors, con Boeing y la NASA.",
+    h: "Permitió explorar lejos de la nave en Apollo 15, 16 y 17.",
+    x: 190,
+    y: 225
+  },
+  {
+    n: "Huellas de astronautas",
+    d: "Pisadas dejadas por los astronautas.",
+    c: "Neil Armstrong y Buzz Aldrin, en Apollo 11.",
+    h: "Siguen ahí porque en la Luna casi no hay viento ni lluvia.",
+    x: 120,
+    y: 243
+  },
+  {
+    n: "Bandera",
+    d: "Una bandera plantada por los astronautas.",
+    c: "Los astronautas de Apollo 11.",
+    h: "Marcó la llegada de la primera misión con personas a la Luna.",
+    x: 350,
+    y: 228
+  }
+];

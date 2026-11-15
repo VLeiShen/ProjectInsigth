@@ -16,28 +16,32 @@ const HERO_ICONS = {
 
 const icon = (d) => `<span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false">${d}</svg></span>`;
 
-/* Renderizado de Héroes */
-let hh = "", last = "";
-H.forEach((m, i) => {
-  if (m.w !== last) {
-    hh += `<h3 class="hero-world">${m.w}</h3>`;
-    last = m.w;
-  }
-  hh += `<button type="button" class="hero-item" data-hero="${i}" aria-pressed="false">
+/* ===== Selección de contenido según el idioma activo ===== */
+function D() {
+  return LANG === "en"
+    ? { H: H_EN, TL: TL_EN, SC: SC_EN, MED: MED_EN, DET: DET_EN }
+    : { H, TL, SC, MED, DET };
+}
+function SAB_LIST() { return LANG === "en" ? SABIAS_EN : SABIAS; }
+
+const isMobile = () => window.matchMedia("(max-width: 900px)").matches;
+
+/* ===== Render: Héroes ===== */
+let selHero = null;
+
+function renderHeroes() {
+  let hh = "", last = "";
+  D().H.forEach((m, i) => {
+    if (m.w !== last) {
+      hh += `<h3 class="hero-world">${m.w}</h3>`;
+      last = m.w;
+    }
+    hh += `<button type="button" class="hero-item" data-hero="${i}" aria-pressed="false">
         <span class="hero-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false">${HERO_ICONS[m.icon]}</svg></span>
         <span class="hero-item-label">${m.n}</span><span class="hero-item-arrow" aria-hidden="true">↗</span></button>`;
-});
-$("heroes").innerHTML = hh;
-
-document.querySelectorAll(".hero-vessel-card").forEach(card => {
-  card.addEventListener("click", () => {
-    const expand = !card.classList.contains("is-expanded");
-    document.querySelectorAll(".hero-vessel-card").forEach(item => {
-      item.classList.toggle("is-expanded", item === card && expand);
-      item.setAttribute("aria-pressed", item === card && expand ? "true" : "false");
-    });
   });
-});
+  $("heroes").innerHTML = hh;
+}
 
 function showHero(m, container) {
   const target = container || $("hero-detail");
@@ -46,41 +50,39 @@ function showHero(m, container) {
     : "";
   const visual = m.visual
     ? `<figure class="hero-visual"><span class="hero-visual-label">${m.visualLabel}</span><img src="${m.visual}" alt="${m.visualAlt}" loading="lazy" decoding="async"><figcaption>${m.visualCaption}</figcaption></figure>`
-    : `<div class="hero-visual hero-person-placeholder"><span class="hero-visual-label">${m.visualLabel}</span><span class="hero-initials" aria-hidden="true">${m.personInitials}</span><b>${m.c}</b><small>Imagen de retrato no disponible</small></div>`;
+    : `<div class="hero-visual hero-person-placeholder"><span class="hero-visual-label">${m.visualLabel}</span><span class="hero-initials" aria-hidden="true">${m.personInitials}</span><b>${m.c}</b><small>${t("portraitNA")}</small></div>`;
   const sources = (m.source
-    ? `<a class="hero-source" href="${m.source}" target="_blank" rel="noopener noreferrer">Imagen de misión ↗</a>`
+    ? `<a class="hero-source" href="${m.source}" target="_blank" rel="noopener noreferrer">${t("srcMission")}</a>`
     : "") + (m.visualSource
-    ? `<a class="hero-source" href="${m.visualSource}" target="_blank" rel="noopener noreferrer">Imagen complementaria ↗</a>`
+    ? `<a class="hero-source" href="${m.visualSource}" target="_blank" rel="noopener noreferrer">${t("srcExtra")}</a>`
     : "");
 
   target.innerHTML = `
     <div class="hero-detail-content">
       <header class="hero-detail-header">
-        <div><span class="hero-detail-eyebrow${m.status ? " is-active" : ""}">${m.w} · ${m.status || "MISIÓN"}</span><h3 id="hero-detail-title">${m.n}</h3></div>
-        <p><span>${m.personLabel || "Persona clave"}</span><b>${m.c}</b></p>
+        <div><span class="hero-detail-eyebrow${m.status ? " is-active" : ""}">${m.w} · ${m.status || t("missionLabel")}</span><h3 id="hero-detail-title">${m.n}</h3></div>
+        <p><span>${m.personLabel || t("personKey")}</span><b>${m.c}</b></p>
       </header>
       <div class="hero-detail-grid">
         <article class="hero-story">
-          <span class="hero-story-label">${m.storyLabel || "Quién la creó y qué hizo"}</span>
+          <span class="hero-story-label">${m.storyLabel || t("storyDefault")}</span>
           <h4>${m.c}</h4>
           <p class="hero-role">${m.r}</p>
           <blockquote class="mission-message">
-            <span>MENSAJE IMAGINADO DE LA MISIÓN</span>
+            <span>${t("imaginedMsg")}</span>
             <p>“${m.voz || m.hizo}”</p>
           </blockquote>
-          <details class="hero-fact"><summary>¿Qué hizo?</summary><p>${m.hizo}</p></details>
-          <details class="hero-fact"><summary>¿Qué quedó?</summary><p>${m.quedo}</p></details>
+          <details class="hero-fact"><summary>${t("whatDid")}</summary><p>${m.hizo}</p></details>
+          <details class="hero-fact"><summary>${t("whatLeft")}</summary><p>${m.quedo}</p></details>
           ${missionImage}
         </article>
         ${visual}
       </div>
       <footer class="hero-detail-footer"><span>${m.cred}</span><div class="hero-source-links">${sources}
-        ${m.infoSource ? `<a class="hero-source" href="${m.infoSource}" target="_blank" rel="noopener noreferrer">Ficha NASA ↗</a>` : ""}
+        ${m.infoSource ? `<a class="hero-source" href="${m.infoSource}" target="_blank" rel="noopener noreferrer">${t("srcNasa")}</a>` : ""}
       </div></footer>
     </div>`;
 }
-
-const isMobile = () => window.matchMedia("(max-width: 900px)").matches;
 
 function closeAllMobilePanels() {
   document.querySelectorAll(".hero-mobile-panel").forEach(p => p.remove());
@@ -92,54 +94,60 @@ function closeAllMobilePanels() {
   });
 }
 
-document.querySelectorAll("#heroes .hero-item").forEach(button => {
-  button.onclick = () => {
-    const alreadyOpen = button.classList.contains("is-expanded-mobile");
+/* Delegación: los botones de Héroes se regeneran al cambiar de idioma */
+$("heroes").addEventListener("click", (e) => {
+  const button = e.target.closest(".hero-item");
+  if (!button) return;
+  const alreadyOpen = button.classList.contains("is-expanded-mobile");
 
-    if (isMobile()) {
-      closeAllMobilePanels();
-      if (alreadyOpen) return;
+  if (isMobile()) {
+    closeAllMobilePanels();
+    if (alreadyOpen) { selHero = null; return; }
 
-      button.classList.add("is-selected", "is-expanded-mobile");
-      button.setAttribute("aria-pressed", "true");
-      button.setAttribute("aria-expanded", "true");
+    button.classList.add("is-selected", "is-expanded-mobile");
+    button.setAttribute("aria-pressed", "true");
+    button.setAttribute("aria-expanded", "true");
 
-      const panel = document.createElement("div");
-      panel.className = "hero-mobile-panel";
-      panel.setAttribute("aria-live", "polite");
-      button.insertAdjacentElement("afterend", panel);
-      showHero(H[+button.dataset.hero], panel);
-    } else {
-      document.querySelectorAll("#heroes .hero-item").forEach(item => {
-        const selected = item === button;
-        item.classList.toggle("is-selected", selected);
-        item.setAttribute("aria-pressed", selected ? "true" : "false");
-      });
-      showHero(H[+button.dataset.hero]);
-    }
-  };
+    const panel = document.createElement("div");
+    panel.className = "hero-mobile-panel";
+    panel.setAttribute("aria-live", "polite");
+    button.insertAdjacentElement("afterend", panel);
+    selHero = +button.dataset.hero;
+    showHero(D().H[selHero], panel);
+  } else {
+    document.querySelectorAll("#heroes .hero-item").forEach(item => {
+      const selected = item === button;
+      item.classList.toggle("is-selected", selected);
+      item.setAttribute("aria-pressed", selected ? "true" : "false");
+    });
+    selHero = +button.dataset.hero;
+    showHero(D().H[selHero]);
+  }
 });
 
 window.addEventListener("resize", () => {
   if (!isMobile()) closeAllMobilePanels();
 });
 
-/* Renderizado de Línea de tiempo, Ciencia, Medios y Créditos */
-$("tl").innerHTML = TL.map((t, i) =>
-  `<li data-rv style="--i:${i % 6}">
+/* ===== Render: Línea de tiempo, Ciencia, Medios y Créditos ===== */
+function renderTL() {
+  $("tl").innerHTML = D().TL.map((t2, i) =>
+    `<li data-rv style="--i:${i % 6}">
     <span class="tl-node" aria-hidden="true"></span>
-    <b>${t.year}</b>
+    <b>${t2.year}</b>
     <figure class="tl-visual">
-      <img src="${t.image}" alt="${t.alt}" loading="lazy" decoding="async">
-      <figcaption>${t.credit}</figcaption>
+      <img src="${t2.image}" alt="${t2.alt}" loading="lazy" decoding="async">
+      <figcaption>${t2.credit}</figcaption>
     </figure>
-    <h3>${t.title}</h3>
-    <p>${t.description}</p>
-    <a class="tl-source" href="${t.source}" target="_blank" rel="noopener noreferrer">Ver imagen NASA <span aria-hidden="true">↗</span></a>
+    <h3>${t2.title}</h3>
+    <p>${t2.description}</p>
+    <a class="tl-source" href="${t2.source}" target="_blank" rel="noopener noreferrer">${t("tlSource")} <span aria-hidden="true">↗</span></a>
   </li>`).join("");
+}
 
-$("sci").innerHTML = SC.map((s, i) =>
-  `<article class="card sci-card" data-rv style="--i:${i % 6}">
+function renderSci() {
+  $("sci").innerHTML = D().SC.map((s, i) =>
+    `<article class="card sci-card" data-rv style="--i:${i % 6}">
     <figure class="sci-visual">
       <img src="${s.image}" alt="${s.alt}" loading="lazy" decoding="async">
       <figcaption>${s.credit}</figcaption>
@@ -148,46 +156,59 @@ $("sci").innerHTML = SC.map((s, i) =>
       <span class="sci-category">${s.category}</span>
       <h3>${s.title}</h3>
       <details class="sci-discovery">
-        <summary>¿Cómo lo averiguaron?</summary>
+        <summary>${t("sciHow")}</summary>
         <p>${s.description}</p>
       </details>
-      <a class="sci-source" href="${s.source}" target="_blank" rel="noopener noreferrer">Explorar fuente NASA <span aria-hidden="true">↗</span></a>
+      <a class="sci-source" href="${s.source}" target="_blank" rel="noopener noreferrer">${t("sciSource")} <span aria-hidden="true">↗</span></a>
     </div>
   </article>`).join("");
+}
 
-$("media").innerHTML = MED.map((m, i) => {
-  let e;
-  if (m.youtube) {
-    e = `<div class="media-video"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${m.youtube}" title="${m.t}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
-  } else if (m.src) {
-    e = m.k === "video"
-      ? `<div class="ph"><video controls src="${m.src}"></video></div>`
-      : `<audio controls preload="none" src="${m.src}"></audio>`;
-  } else if (m.link) {
-    e = `<a class="media-link" href="${m.link}" target="_blank" rel="noopener noreferrer">Abrir en el sitio oficial ↗</a>`;
-  } else {
-    e = `<div class="ph">Archivo pendiente</div>`;
-  }
-  return `<div class="card" data-rv style="--i:${i}">${icon(m.k === "video" ? ICON.video : ICON.audio)}<b>${m.t}</b>${e}<div class="cap">${m.cred}</div></div>`;
-}).join("");
+function renderMedia() {
+  $("media").innerHTML = D().MED.map((m, i) => {
+    let e;
+    if (m.youtube) {
+      e = `<div class="media-video"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${m.youtube}" title="${m.t}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+    } else if (m.src) {
+      e = m.k === "video"
+        ? `<div class="ph"><video controls src="${m.src}"></video></div>`
+        : `<audio controls preload="none" src="${m.src}"></audio>`;
+    } else if (m.link) {
+      e = `<a class="media-link" href="${m.link}" target="_blank" rel="noopener noreferrer">${t("openExternal")}</a>`;
+    } else {
+      e = `<div class="ph">${t("pending")}</div>`;
+    }
+    return `<div class="card" data-rv style="--i:${i}">${icon(m.k === "video" ? ICON.video : ICON.audio)}<b>${m.t}</b>${e}<div class="cap">${m.cred}</div></div>`;
+  }).join("");
+}
 
-$("cred").innerHTML = H.map(m => `<li>${m.n}: ${m.cred}</li>`).join("");
+function renderCred() {
+  $("cred").innerHTML = D().H.map(m => `<li>${m.n}: ${m.cred}</li>`).join("");
+}
 
-/* Navegación SPA */
+/* ===== Navegación SPA ===== */
 const V = [
-  ["portada", "Inicio", '<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-6h-4v6H4a1 1 0 0 1-1-1z"/>'],
-  ["heroes", "Héroes", '<path d="M12 3c3 3 5 6 5 10l-5 8-5-8c0-4 2-7 5-10Z"/><circle cx="12" cy="12" r="1.5"/><path d="m7 13-3 2 1 3 3-2m9-3 3 2-1 3-3-2"/>'],
-  ["tiempo", "Tiempo", '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'],
-  ["ciencia", "Ciencia", '<circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(30 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-30 12 12)"/>'],
-  ["medios", "Medios", '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/>'],
-  ["juego", "Juego", '<path d="M7 9h10a4 4 0 0 1 3.8 5l-.7 2.4a2 2 0 0 1-3.3 1l-2-1.8h-5l-2 1.8a2 2 0 0 1-3.3-1L4.8 14A4 4 0 0 1 7 9Z"/><path d="M8 12v4m-2-2h4m6-1h.01M18 15h.01"/>'],
-  ["creditos", "Créditos", '<path d="M6 3h8l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v5h5m-11 4h6m-6 4h6"/>']
+  ["portada", "brandHome", '<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-6h-4v6H4a1 1 0 0 1-1-1z"/>'],
+  ["heroes", "navHeroes", '<path d="M12 3c3 3 5 6 5 10l-5 8-5-8c0-4 2-7 5-10Z"/><circle cx="12" cy="12" r="1.5"/><path d="m7 13-3 2 1 3 3-2m9-3 3 2-1 3-3-2"/>'],
+  ["tiempo", "navTime", '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'],
+  ["ciencia", "navSci", '<circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(30 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-30 12 12)"/>'],
+  ["medios", "navMedia", '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/>'],
+  ["juego", "navGame", '<path d="M7 9h10a4 4 0 0 1 3.8 5l-.7 2.4a2 2 0 0 1-3.3 1l-2-1.8h-5l-2 1.8a2 2 0 0 1-3.3-1L4.8 14A4 4 0 0 1 7 9Z"/><path d="M8 12v4m-2-2h4m6-1h.01M18 15h.01"/>'],
+  ["creditos", "navCredits", '<path d="M6 3h8l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v5h5m-11 4h6m-6 4h6"/>']
 ];
 
-$("nav").innerHTML = `<div class="nav-brand"><a href="#portada" aria-label="Space Trace, portada"><span class="nav-brand-mark" aria-hidden="true">✦</span><span>SPACE TRACE</span></a></div>` +
-  V.filter(v => v[0] !== "portada")
-   .map(v => `<a href="#${v[0]}"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${v[2]}</svg><span>${v[1]}</span></a>`)
-   .join("");
+function renderNav() {
+  const h = location.hash.slice(1) || "portada";
+  $("nav").innerHTML =
+    `<div class="nav-brand"><a href="#portada" aria-label="${t("brandHome")}"><span class="nav-brand-mark" aria-hidden="true">✦</span><span>${t("brand")}</span></a></div>` +
+    V.filter(v => v[0] !== "portada")
+      .map(v => `<a href="#${v[0]}"${v[0] === h ? ' class="on" aria-current="page"' : ""}><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${v[2]}</svg><span>${t(v[1])}</span></a>`)
+      .join("") +
+    `<button type="button" id="lang" class="lang-toggle" aria-label="${t(LANG === "en" ? "langToEs" : "langToEn")}" title="${t(LANG === "en" ? "langToEs" : "langToEn")}">${LANG === "en" ? "ES" : "EN"}</button>`;
+
+  const langBtn = $("lang");
+  if (langBtn) langBtn.onclick = () => setLang(LANG === "en" ? "es" : "en");
+}
 
 /* ===== Bitácora local de exploración ===== */
 const EXPLORE_KEY = "space-trace.exploration.v1";
@@ -211,13 +232,13 @@ try {
 function updateExplorationProgress() {
   const count = exploredSections.length;
   $("exploration-count").textContent = count === EXPLORE_SECTIONS.length
-    ? "¡Bitácora completa!"
-    : `${count}/5 archivos`;
+    ? t("logComplete")
+    : `${count}/5 ${t("files")}`;
   $("exploration-meter").value = count;
   document.querySelectorAll("[data-explore-step]").forEach(step => {
     const complete = exploredSections.includes(step.dataset.exploreStep);
     step.classList.toggle("is-complete", complete);
-    if (complete) step.setAttribute("aria-label", `${step.textContent}: explorado`);
+    if (complete) step.setAttribute("aria-label", `${step.textContent}: ${t("files")}`);
     else step.removeAttribute("aria-label");
   });
 }
@@ -232,8 +253,6 @@ function recordExploration(section) {
     console.warn("No se pudo guardar la bitácora; el progreso se conservará durante esta visita.", error);
   }
 }
-
-updateExplorationProgress();
 
 /* ===== Aparición progresiva de tarjetas al entrar en pantalla ===== */
 const rvObs = "IntersectionObserver" in window
@@ -255,25 +274,25 @@ function reveals() {
 }
 
 /* ===== Mascota guía: Oppi ===== */
-const OPPI_MSG = {
-  portada: "¡Hola! Soy Oppi, tu guía espacial. 🤖 Tócame y te llevo de recorrido por todo el archivo.",
-  heroes: "Cada misión guarda la historia de quien la hizo posible. ¡Toca una tarjeta para descubrirla!",
-  tiempo: "Aquí viajamos por el tiempo: desliza la línea y encuentra los momentos clave. ⏳",
-  ciencia: "Estos son los hallazgos más asombrosos. Abre «¿Cómo lo averiguaron?» para ver el secreto. 🔬",
-  medios: "Estas son las señales recuperadas: videos y sonidos de las misiones. 📡",
-  juego: "¡Hora de jugar! Hay tres desafíos esperándote. ¿Los superas todos? 🚀",
-  creditos: "Estas son nuestras fuentes. ¡Los buenos exploradores citan su trabajo! 📚"
+const OPPI_KEYS = {
+  portada: "oppiPortada",
+  heroes: "oppiHeroes",
+  tiempo: "oppiTiempo",
+  ciencia: "oppiCiencia",
+  medios: "oppiMedios",
+  juego: "oppiJuego",
+  creditos: "oppiCreditos"
 };
 
 /* Recorrido guiado: Oppi nos lleva por cada sección (y por las partes de Héroes). */
 const OPPI_TOUR = [
-  { h: "heroes", sel: "#heroes", msg: "¡Empecemos por los Héroes! 👉 Estas son las cinco misiones que la NASA dejó atrás. Toca una tarjeta para conocerla." },
-  { h: "heroes", sel: "#hero-detail", msg: "Aquí aparece su historia completa: quién la creó, qué hizo y qué quedó. 👉 Prueba con otra misión." },
-  { h: "tiempo", sel: "#tl", msg: "Ahora viajemos en el Tiempo. 👉 Desliza la línea y descubre los momentos clave de la exploración espacial." },
-  { h: "ciencia", sel: "#sci", msg: "Estos son los hallazgos que dejaron. 👉 Abre «¿Cómo lo averiguaron?» para ver el secreto científico." },
-  { h: "medios", sel: "#media", msg: "Aquí están las señales recuperadas: videos y sonidos de las misiones. 📡" },
-  { h: "juego", sel: "#menu", msg: "¡Y ahora a jugar! 👉 Tienes tres desafíos: rescatar al rover, ser detective y el mini-quiz." },
-  { h: "creditos", sel: "#v-creditos .card", msg: "Por último, las fuentes. 📚 ¡Los buenos exploradores citan su trabajo!" }
+  { h: "heroes", sel: "#heroes" },
+  { h: "heroes", sel: "#hero-detail" },
+  { h: "tiempo", sel: "#tl" },
+  { h: "ciencia", sel: "#sci" },
+  { h: "medios", sel: "#media" },
+  { h: "juego", sel: "#menu" },
+  { h: "creditos", sel: "#v-creditos .card" }
 ];
 
 const oppi = (() => {
@@ -283,7 +302,7 @@ const oppi = (() => {
   wrap.className = "oppi";
   wrap.innerHTML = `
     <div class="oppi-bubble"><span class="oppi-step" hidden></span><p></p></div>
-    <button class="oppi-body" type="button" aria-label="Hablar con Oppi, la mascota guía">
+    <button class="oppi-body" type="button" aria-label="${t("oppiLabel")}">
       <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
         <path d="M32 20v-7M24 13h16"/>
         <rect x="16" y="20" width="32" height="26" rx="9"/>
@@ -298,16 +317,18 @@ const oppi = (() => {
   const texto = bubble.querySelector("p");
   const paso = bubble.querySelector(".oppi-step");
   const boton = wrap.querySelector(".oppi-body");
-  let ocultar = null, idx = -1, navGuia = false, resaltado = null, siguiendo = false, programado = false, programadoTid = null;
+  let ocultar = null, idx = -1, navGuia = false, resaltado = null, siguiendo = false, programado = false, programadoTid = null, ultimo = null;
   const reducido = matchMedia("(prefers-reduced-motion:reduce)").matches;
 
   function say(mensaje, fijo, pasoTexto) {
+    ultimo = { mensaje: mensaje, fijo: fijo, pasoTexto: pasoTexto };
     texto.textContent = mensaje;
     paso.hidden = !pasoTexto;
     if (pasoTexto) paso.textContent = pasoTexto;
     bubble.classList.add("show");
     clearTimeout(ocultar);
     if (!fijo) ocultar = setTimeout(() => bubble.classList.remove("show"), 9500);
+    OppiVoice.speak(mensaje);
   }
 
   function limpiarResaltado() {
@@ -371,7 +392,7 @@ const oppi = (() => {
     const p = OPPI_TOUR[idx];
     const el = p.sel ? document.querySelector(p.sel) : null;
     destacar(p.sel);
-    say(p.msg, true, `Paso ${idx + 1} de ${OPPI_TOUR.length}`);
+    say(t("tour" + idx), true, `${t("step")} ${idx + 1} ${t("of")} ${OPPI_TOUR.length}`);
     saltar();
     if (el) {
       programado = true;
@@ -418,7 +439,7 @@ const oppi = (() => {
       idx++;
       if (idx >= OPPI_TOUR.length) {
         if (typeof bp === "function") bp(990);
-        cerrarGuia("¡Recorrido completo! 🎉 Ya conoces todo el archivo. Tócame cuando quieras un dato curioso.", true);
+        cerrarGuia(t("oppiDone"), true);
         return;
       }
       irA();
@@ -431,13 +452,13 @@ const oppi = (() => {
       return;
     }
 
-    say("¿Sabías que…? " + SABIAS[Math.floor(Math.random() * SABIAS.length)]);
+    say(t("didYouKnow") + SAB_LIST()[Math.floor(Math.random() * SAB_LIST().length)]);
   };
 
   return {
     route(h) {
       if (idx >= 0) cerrarGuia(null, false);
-      say(OPPI_MSG[h] || OPPI_MSG.portada, h === "portada");
+      say(t(OPPI_KEYS[h] || "oppiPortada"), h === "portada");
     },
     continuarTour() {
       if (idx >= 0) mostrarPaso();
@@ -446,6 +467,13 @@ const oppi = (() => {
       const v = navGuia;
       navGuia = false;
       return v;
+    },
+    /* Vuelve a decir el último mensaje en el idioma recién elegido */
+    refresh() {
+      if (idx >= 0) { mostrarPaso(); return; }
+      if (!ultimo) return;
+      const key = OPPI_KEYS[location.hash.slice(1) || "portada"] || "oppiPortada";
+      say(t(key), ultimo.fijo, ultimo.pasoTexto);
     }
   };
 })();
@@ -455,7 +483,6 @@ const toTop = document.createElement("button");
 toTop.type = "button";
 toTop.id = "toTop";
 toTop.className = "chip";
-toTop.setAttribute("aria-label", "Volver arriba");
 toTop.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V6m-6 6 6-6 6 6"/></svg>';
 document.body.appendChild(toTop);
 toTop.onclick = () => {
@@ -490,7 +517,29 @@ function onScroll() {
   toTop.classList.toggle("on", window.scrollY > 420);
 }
 
+/* ===== Re-render completo al cambiar de idioma ===== */
+function renderAll() {
+  renderHeroes();
+  renderTL();
+  renderSci();
+  renderMedia();
+  renderCred();
+  renderNav();
+  updateExplorationProgress();
+  reveals();
+  if (selHero != null && !isMobile()) showHero(D().H[selHero]);
+}
+window.__onLangChange = function () {
+  applyStatic();
+  renderAll();
+  oppi.refresh();
+};
+
 window.addEventListener("scroll", onScroll, { passive: true });
 window.addEventListener("hashchange", route);
 $("start").onclick = () => { location.hash = "heroes"; };
+
+/* Arranque */
+renderAll();
+applyStatic();
 route();

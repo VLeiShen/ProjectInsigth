@@ -2815,9 +2815,9 @@ nav > a {
 
 @media (min-width: 761px) and (max-width: 1100px) {
   nav {
-    gap: 12px;
-    padding-right: 22px;
-    padding-left: 22px;
+    gap: 10px;
+    padding-right: 18px;
+    padding-left: 18px;
   }
 
   nav a {
@@ -2828,6 +2828,20 @@ nav > a {
   .nav-icon {
     width: 18px;
     height: 18px;
+  }
+
+  .lang-toggle {
+    margin-left: 8px;
+  }
+}
+
+@media (max-width: 760px) {
+  .lang-toggle {
+    margin-left: 4px;
+    min-width: 40px;
+    height: 30px;
+    padding: 0 9px;
+    font-size: .72rem;
   }
 }
 
@@ -3513,6 +3527,50 @@ body.game-open .oppi {
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+/* Botón dorado de idioma (EN | ES) en la barra de navegación */
+.lang-toggle {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  display: grid;
+  min-width: 46px;
+  height: 34px;
+  padding: 0 12px;
+  margin-left: clamp(8px, 1.4vw, 20px);
+  place-items: center;
+  border: 1px solid rgba(212, 184, 116, .55);
+  border-radius: 999px;
+  background: linear-gradient(145deg, rgba(212, 184, 116, .14), rgba(212, 184, 116, .02));
+  color: #e0c779;
+  font: 800 .78rem "Manrope", "Segoe UI", sans-serif;
+  letter-spacing: .12em;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.lang-toggle:hover {
+  border-color: rgba(226, 199, 127, .85);
+  background: linear-gradient(145deg, rgba(212, 184, 116, .24), rgba(212, 184, 116, .06));
+  color: #f7e6b4;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(212, 184, 116, .16);
+}
+
+.lang-toggle:focus-visible {
+  outline: 2px solid #d7b967;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lang-toggle {
+    transition: none;
+  }
+
+  .lang-toggle:hover {
+    transform: none;
+  }
 }
 
 /* ===== Mini-quiz ===== */

@@ -5,8 +5,8 @@ function gRover() {
 }
 
 function g3D() {
-  var base = "Junta 10 ⭐ antes de que llegue la tormenta. Las esferas celestes son viento: limpian tus paneles solares y recargan la 🔋.";
-  $("gbody").innerHTML = '<canvas id="rc" width="320" height="440" style="width:100%;max-width:360px;display:block;margin:10px auto;border-radius:14px;touch-action:none"></canvas><div id="hud" style="text-align:center;font-weight:800"></div><progress id="pb" max="100" value="100" style="width:100%;max-width:360px;display:block;margin:6px auto"></progress><div style="text-align:center"><button class="btn" id="bl" aria-label="Izquierda">◀</button> <button class="btn" id="br" aria-label="Derecha">▶</button></div><p id="rm" class="hint" style="text-align:center">' + base + '</p>';
+  var base = t("roverBase");
+  $("gbody").innerHTML = '<canvas id="rc" width="320" height="440" style="width:100%;max-width:360px;display:block;margin:10px auto;border-radius:14px;touch-action:none"></canvas><div id="hud" style="text-align:center;font-weight:800"></div><progress id="pb" max="100" value="100" style="width:100%;max-width:360px;display:block;margin:6px auto"></progress><div style="text-align:center"><button class="btn" id="bl" aria-label="' + t("left") + '">◀</button> <button class="btn" id="br" aria-label="' + t("right") + '">▶</button></div><p id="rm" class="hint" style="text-align:center">' + base + '</p>';
   var T = THREE, c = $("rc"), R = new T.WebGLRenderer({ canvas: c, antialias: true });
   R.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
   R.setSize(320, 440, false);
@@ -86,7 +86,7 @@ function g3D() {
   }
 
   var LX = [-3, 0, 3], tl = 1, O = [], s = 0, lv = 3, en = 100, t0 = Date.now(), last = t0, dd = 0, run = true, nt = 0, hit = 0, sp = .28,
-      F = ["Opportunity halló pruebas de agua en Marte.", "Duró casi 15 años; se planeó para 90 días.", "Steve Squyres lideró sus instrumentos."];
+      F = [t("roverFact1"), t("roverFact2"), t("roverFact3")];
 
   cur = function() { run = false; R.dispose(); };
   function mv(d) { tl = Math.max(0, Math.min(2, tl + d)); }
@@ -105,7 +105,7 @@ function g3D() {
     run = false;
     R.dispose();
     if (w) col.rover = true;
-    $("rm").innerHTML = m + '<br><button class="btn" id="ag">Jugar otra vez</button>';
+    $("rm").innerHTML = m + '<br><button class="btn" id="ag">' + t("playAgain") + '</button>';
     $("ag").onclick = gRover;
   }
 
@@ -199,19 +199,19 @@ function g3D() {
     $("hud").textContent = "⭐ " + s + "/10   ❤ " + lv + "   ⏱ " + Math.max(0, Math.ceil(tm)) + "   🔋 " + Math.max(0, Math.round(en)) + "%";
     $("pb").value = Math.max(0, en);
     if (nt > 0 && --nt == 0) $("rm").textContent = base;
-    if (s >= 10) return end(true, "¡Rescataste al rover! En 2018 Opportunity no pudo recargarse en la tormenta; tú sí. 🎉");
-    if (lv <= 0) return end(false, "Chocaste demasiado. ¡Inténtalo otra vez!");
-    if (en <= 0) return end(false, "Te quedaste sin energía, como Opportunity en 2018.");
-    if (tm <= 0) return end(false, "La tormenta llegó antes de juntar todas las muestras.");
+    if (s >= 10) return end(true, t("roverWin"));
+    if (lv <= 0) return end(false, t("roverCrash"));
+    if (en <= 0) return end(false, t("roverEmpty"));
+    if (tm <= 0) return end(false, t("roverStorm"));
     requestAnimationFrame(tick);
   }
   tick();
 }
 
 function gRover2D() {
-  $("gbody").innerHTML = '<canvas id="rc" width="320" height="440" style="width:100%;max-width:360px;display:block;margin:10px auto;border-radius:14px;touch-action:none"></canvas><div style="text-align:center"><button class="btn" id="bl" aria-label="Izquierda">◀</button> <button class="btn" id="br" aria-label="Derecha">▶</button></div><p id="rm" class="hint" style="text-align:center">Junta 10 ⭐ antes de que llegue la tormenta. El viento 💨 limpia tus paneles solares y recarga la energía 🔋. Toca los lados para moverte.</p>';
+  $("gbody").innerHTML = '<canvas id="rc" width="320" height="440" style="width:100%;max-width:360px;display:block;margin:10px auto;border-radius:14px;touch-action:none"></canvas><div style="text-align:center"><button class="btn" id="bl" aria-label="' + t("left") + '">◀</button> <button class="btn" id="br" aria-label="' + t("right") + '">▶</button></div><p id="rm" class="hint" style="text-align:center">' + t("roverBase2D") + '</p>';
   var c = $("rc"), x = c.getContext("2d"), LX = [55, 160, 265], tl = 1, rx = 160, O = [], TR = [], PB = [], DS = [], s = 0, lv = 3, en = 100, t0 = Date.now(), last = t0, dd = 0, run = true, note = "", nt = 0, hit = 0, sp = 3,
-      F = ["Opportunity halló pruebas de agua en Marte.", "Duró casi 15 años; se planeó para 90 días.", "Steve Squyres lideró sus instrumentos."];
+      F = [t("roverFact1"), t("roverFact2"), t("roverFact3")];
 
   for (var i = 0; i < 70; i++) PB.push({ x: Math.random() * 320, y: Math.random() * 440, r: Math.random() * 2 + .6 });
   for (i = 0; i < 30; i++) DS.push({ x: Math.random() * 320, y: Math.random() * 440, v: Math.random() * 2 + 1 });
@@ -232,7 +232,7 @@ function gRover2D() {
   function end(w, m) {
     run = false;
     if (w) col.rover = true;
-    $("rm").innerHTML = m + '<br><button class="btn" id="ag">Jugar otra vez</button>';
+    $("rm").innerHTML = m + '<br><button class="btn" id="ag">' + t("playAgain") + '</button>';
     $("ag").onclick = gRover;
   }
 
@@ -422,10 +422,10 @@ function gRover2D() {
       x.fillText(note, 18, 89);
     }
 
-    if (s >= 10) return end(true, "¡Rescataste al rover! En 2018 Opportunity no pudo recargarse en la tormenta; tú sí. 🎉");
-    if (lv <= 0) return end(false, "Chocaste demasiado. ¡Inténtalo otra vez!");
-    if (en <= 0) return end(false, "Te quedaste sin energía, como Opportunity en 2018.");
-    if (tm <= 0) return end(false, "La tormenta llegó antes de juntar todas las muestras.");
+    if (s >= 10) return end(true, t("roverWin"));
+    if (lv <= 0) return end(false, t("roverCrash"));
+    if (en <= 0) return end(false, t("roverEmpty"));
+    if (tm <= 0) return end(false, t("roverStorm"));
     requestAnimationFrame(tick);
   }
   tick();

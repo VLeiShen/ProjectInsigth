@@ -1,47 +1,6 @@
 /* ===== Juego 2: Detective espacial ===== */
 function gDet() {
-  var I = [
-    {
-      n: "Etapa de descenso del módulo lunar",
-      d: "La parte inferior del módulo con el que Apollo 11 aterrizó.",
-      c: "Thomas J. Kelly, ingeniero jefe en Grumman.",
-      h: "Sirvió de plataforma de aterrizaje y quedó en la Luna.",
-      x: 70,
-      y: 190
-    },
-    {
-      n: "Reflector láser",
-      d: "Un espejo especial que devuelve la luz hacia donde vino.",
-      c: "Un equipo científico de Apollo (nombre por confirmar).",
-      h: "Desde la Tierra se le apunta con láser para medir la distancia a la Luna.",
-      x: 310,
-      y: 175
-    },
-    {
-      n: "Rover lunar",
-      d: "Un coche eléctrico para astronautas.",
-      c: "Ferenc Pavlics, ingeniero de General Motors, con Boeing y la NASA.",
-      h: "Permitió explorar lejos de la nave en Apollo 15, 16 y 17.",
-      x: 190,
-      y: 225
-    },
-    {
-      n: "Huellas de astronautas",
-      d: "Pisadas dejadas por los astronautas.",
-      c: "Neil Armstrong y Buzz Aldrin, en Apollo 11.",
-      h: "Siguen ahí porque en la Luna casi no hay viento ni lluvia.",
-      x: 120,
-      y: 243
-    },
-    {
-      n: "Bandera",
-      d: "Una bandera plantada por los astronautas.",
-      c: "Los astronautas de Apollo 11.",
-      h: "Marcó la llegada de la primera misión con personas a la Luna.",
-      x: 350,
-      y: 228
-    }
-  ], fd = [];
+  var I = D().DET, fd = [];
 
   var sh = [
     '<path d="M-14 10 L-10 -6 L10 -6 L14 10Z" fill="#d6a43a"/><rect x="-16" y="10" width="32" height="3" fill="#8a6d1f"/>',
@@ -55,14 +14,14 @@ function gDet() {
     return '<g data-i="' + i + '" role="button" tabindex="0" aria-label="' + o.n + '" aria-pressed="false" transform="translate(' + o.x + ',' + o.y + ')" style="cursor:pointer">' + sh[i] + '<circle r="22" fill="transparent" id="h' + i + '" stroke="none" stroke-width="3"/></g>';
   }).join("");
 
-  $("gbody").innerHTML = '<p>Selecciona los objetos escondidos en la Luna. <b id="cn">0/5</b></p>' +
-    '<svg id="sc" role="group" aria-label="Escena lunar con cinco objetos por encontrar" viewBox="0 0 400 260" style="width:100%;border-radius:14px;display:block;touch-action:manipulation">' +
+  $("gbody").innerHTML = '<p>' + t("detIntro") + ' <b id="cn">0/5</b></p>' +
+    '<svg id="sc" role="group" aria-label="' + t("detSceneAria") + '" viewBox="0 0 400 260" style="width:100%;border-radius:14px;display:block;touch-action:manipulation">' +
     '<rect width="400" height="260" fill="#0b0f2a"/>' +
     '<circle cx="40" cy="30" r="1.5" fill="#fff"/><circle cx="150" cy="60" r="1.5" fill="#fff"/><circle cx="260" cy="25" r="1.5" fill="#fff"/><circle cx="360" cy="70" r="1.5" fill="#fff"/>' +
     '<circle cx="330" cy="38" r="15" fill="#2d8cff"/>' +
     '<ellipse cx="200" cy="300" rx="320" ry="170" fill="#8d93aa"/>' +
     '<ellipse cx="90" cy="215" rx="22" ry="7" fill="#737a94"/><ellipse cx="280" cy="205" rx="26" ry="8" fill="#737a94"/>' +
-    g + '</svg><button class="btn" id="pk">💡 Pista</button><div id="di"></div>';
+    g + '</svg><button class="btn" id="pk">' + t("hint") + '</button><div id="di"></div>';
 
   function select(i) {
     var o = I[i];
@@ -72,8 +31,8 @@ function gDet() {
       $("sc").querySelector('[data-i="' + i + '"]').setAttribute("aria-pressed", "true");
     }
     $("cn").textContent = fd.length + "/5";
-    $("di").innerHTML = '<div class="card"><b>' + o.n + '</b><p><b>Qué es:</b> ' + o.d + '</p><p><b>Quién la creó o la dejó:</b> ' + o.c + '</p><p><b>Qué hizo:</b> ' + o.h + '</p></div>' +
-      (fd.length == 5 ? '<div class="card"><b>🎉 ¡Detective espacial!</b><p>Encontraste todo lo que quedó en la Luna.</p></div>' : '');
+    $("di").innerHTML = '<div class="card"><b>' + o.n + '</b><p><b>' + t("detWhatIs") + '</b> ' + o.d + '</p><p><b>' + t("detWho") + '</b> ' + o.c + '</p><p><b>' + t("detDid") + '</b> ' + o.h + '</p></div>' +
+      (fd.length == 5 ? '<div class="card"><b>' + t("detWin") + '</b><p>' + t("detWinText") + '</p></div>' : '');
     if (fd.length == 5) col.det = true;
   }
 

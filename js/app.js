@@ -115,18 +115,34 @@ $("heroes").addEventListener("click", (e) => {
     selHero = +button.dataset.hero;
     showHero(D().H[selHero], panel);
   } else {
+    const wasSelected = button.classList.contains("is-selected");
     document.querySelectorAll("#heroes .hero-item").forEach(item => {
-      const selected = item === button;
-      item.classList.toggle("is-selected", selected);
-      item.setAttribute("aria-pressed", selected ? "true" : "false");
+      item.classList.remove("is-selected");
+      item.setAttribute("aria-pressed", "false");
     });
+    if (wasSelected) {
+      selHero = null;
+      $("hero-detail").classList.add("is-empty");
+      return;
+    }
+    button.classList.add("is-selected");
+    button.setAttribute("aria-pressed", "true");
     selHero = +button.dataset.hero;
     showHero(D().H[selHero]);
+    $("hero-detail").classList.remove("is-empty");
   }
 });
 
 window.addEventListener("resize", () => {
-  if (!isMobile()) closeAllMobilePanels();
+  if (!isMobile()) {
+    closeAllMobilePanels();
+    if (selHero != null) {
+      showHero(D().H[selHero]);
+      $("hero-detail").classList.remove("is-empty");
+    } else {
+      $("hero-detail").classList.add("is-empty");
+    }
+  }
 });
 
 /* ===== Render: Línea de tiempo, Ciencia, Medios y Créditos ===== */
@@ -527,7 +543,12 @@ function renderAll() {
   renderNav();
   updateExplorationProgress();
   reveals();
-  if (selHero != null && !isMobile()) showHero(D().H[selHero]);
+  if (selHero != null && !isMobile()) {
+    showHero(D().H[selHero]);
+    $("hero-detail").classList.remove("is-empty");
+  } else {
+    $("hero-detail").classList.add("is-empty");
+  }
 }
 window.__onLangChange = function () {
   applyStatic();

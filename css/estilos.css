@@ -700,6 +700,10 @@ body.home #v-portada {
   box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
 }
 
+.hero-detail.is-empty {
+  display: none;
+}
+
 .hero-detail-empty {
   display: grid;
   flex: 1;

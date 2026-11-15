@@ -227,7 +227,7 @@ var SC_EN = [
   {
     category: "Voyager 2 · Atmospheres",
     title: "The haze around Titan",
-    description: "During its encounter with Saturn, Voyager 2 observed the dense atmosphere of Titan and a layer of high haze lit around its disk. The surface was hidden behind that shroud.",
+    description: "During its encounter with Saturn, Voyager 2 observed the dense atmosphere of Titan and a layer of high haze lit around its disk. The surface was hidden behind that shroud. Voyager 2 is the twin probe of Voyager 1, with which it shared the same mission to explore the outer solar system.",
     image: "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia02/pia02290/PIA02290.jpg?w=800&h=800&fit=clip&crop=faces%2Cfocalpoint",
     alt: "Titan surrounded by a haze layer in an image from Voyager 2",
     credit: "NASA/JPL · Voyager 2 image",

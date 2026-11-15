@@ -60,7 +60,7 @@ var I18N = {
     /* Sección Ciencia */
     sciKicker: "HALLAZGOS · 02",
     sciTitle: "La ciencia que dejaron",
-    sciSub: "Seis hallazgos que transformaron nuestra comprensión de la Luna, Marte y el espacio profundo.",
+    sciSub: "Seis hallazgos que transformaron nuestra comprensión de la Luna, Marte, los mundos del sistema solar exterior y el espacio interestelar.",
 
     /* Sección Medios */
     mediaKicker: "SEÑALES RECUPERADAS · 03",
@@ -231,7 +231,7 @@ var I18N = {
 
     sciKicker: "FINDINGS · 02",
     sciTitle: "The science they left behind",
-    sciSub: "Six findings that transformed our understanding of the Moon, Mars and deep space.",
+    sciSub: "Six findings that transformed our understanding of the Moon, Mars, the worlds of the outer solar system and interstellar space.",
 
     mediaKicker: "RECOVERED SIGNALS · 03",
     mediaTitle: "Videos and sounds",

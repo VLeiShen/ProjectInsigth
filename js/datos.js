@@ -226,7 +226,7 @@ var SC = [
   {
     category: "Voyager 2 · Atmósferas",
     title: "La neblina que envuelve a Titán",
-    description: "Durante su encuentro con Saturno, Voyager 2 observó la densa atmósfera de Titán y una capa de neblina alta iluminada alrededor de su disco. La superficie quedaba oculta tras esa envoltura.",
+    description: "Durante su encuentro con Saturno, Voyager 2 observó la densa atmósfera de Titán y una capa de neblina alta iluminada alrededor de su disco. La superficie quedaba oculta tras esa envoltura. Voyager 2 es la nave gemela de Voyager 1, con la que compartió la misma misión de explorar el sistema solar exterior.",
     image: "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia02/pia02290/PIA02290.jpg?w=800&h=800&fit=clip&crop=faces%2Cfocalpoint",
     alt: "Titán rodeado por una capa de neblina en una imagen de Voyager 2",
     credit: "NASA/JPL · imagen Voyager 2",

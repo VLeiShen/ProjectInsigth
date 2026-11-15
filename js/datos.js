@@ -304,11 +304,36 @@ var SABIAS = [
   "Voyager 1 salió de la Tierra en 1977 y todavía envía señales desde el espacio interestelar."
 ];
 
-/* MEDIOS: src vacío = recuadro provisional */
+/* MEDIOS: videos de YouTube embebidos y audios externos de NASA (sin archivos locales) */
 var MED = [
-  { t: "Video: Apollo 11", k: "video", src: "", cred: "Crédito: NASA (pendiente)" },
-  { t: "Video: Ingenuity", k: "video", src: "", cred: "Crédito: NASA/JPL-Caltech (pendiente)" },
-  { t: "Audio: Ingenuity volando en Marte", k: "audio", src: "", cred: "Crédito: NASA/JPL-Caltech (pendiente)" },
-  { t: "Audio: Apollo", k: "audio", src: "", cred: "Crédito: NASA (pendiente)" },
-  { t: "Audio: disco de oro de la Voyager", k: "audio", src: "", cred: "Crédito: NASA/JPL (pendiente)" }
+  {
+    t: "Apollo 11: el primer paseo lunar",
+    k: "video",
+    youtube: "S9HdPi9Ikhk",
+    cred: "Crédito: NASA — Restored Apollo 11 Moonwalk (dominio público)"
+  },
+  {
+    t: "Ingenuity: primer vuelo en Marte",
+    k: "video",
+    youtube: "wMnOo2zcjXA",
+    cred: "Crédito: NASA/JPL-Caltech/ASU/MSSS"
+  },
+  {
+    t: "Audio: Ingenuity volando en Marte",
+    k: "audio",
+    src: "https://www.nasa.gov/wp-content/uploads/2024/05/jpl-20210506-listen-to-nasas-ingenuity-helicopter-as-it-flies-on-mars.wav",
+    cred: "Crédito: NASA/JPL-Caltech/LANL/CNES/CNRS/ISAE-Supáero"
+  },
+  {
+    t: "Audio: viento y sonidos de Marte",
+    k: "audio",
+    src: "https://www.nasa.gov/wp-content/uploads/2024/05/scam-mic-sol004-run001.wav",
+    cred: "Crédito: NASA/JPL-Caltech — SuperCam del rover Perseverance"
+  },
+  {
+    t: "Disco de oro de la Voyager: Sonidos de la Tierra",
+    k: "audio",
+    link: "https://soundcloud.com/nasa/sets/golden-record-sounds-of",
+    cred: "Crédito: NASA — Voyager Golden Record (abre en SoundCloud)"
+  }
 ];

@@ -156,9 +156,18 @@ $("sci").innerHTML = SC.map((s, i) =>
   </article>`).join("");
 
 $("media").innerHTML = MED.map((m, i) => {
-  const e = m.src
-    ? (m.k === "video" ? `<div class="ph"><video controls src="${m.src}"></video></div>` : `<audio controls src="${m.src}"></audio>`)
-    : `<div class="ph">Archivo pendiente</div>`;
+  let e;
+  if (m.youtube) {
+    e = `<div class="media-video"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${m.youtube}" title="${m.t}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+  } else if (m.src) {
+    e = m.k === "video"
+      ? `<div class="ph"><video controls src="${m.src}"></video></div>`
+      : `<audio controls preload="none" src="${m.src}"></audio>`;
+  } else if (m.link) {
+    e = `<a class="media-link" href="${m.link}" target="_blank" rel="noopener noreferrer">Abrir en el sitio oficial ↗</a>`;
+  } else {
+    e = `<div class="ph">Archivo pendiente</div>`;
+  }
   return `<div class="card" data-rv style="--i:${i}">${icon(m.k === "video" ? ICON.video : ICON.audio)}<b>${m.t}</b>${e}<div class="cap">${m.cred}</div></div>`;
 }).join("");
 

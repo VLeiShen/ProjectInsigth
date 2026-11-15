@@ -39,7 +39,8 @@ document.querySelectorAll(".hero-vessel-card").forEach(card => {
   });
 });
 
-function showHero(m) {
+function showHero(m, container) {
+  const target = container || $("hero-detail");
   const missionImage = m.img
     ? `<figure class="hero-mission-image"><img src="${m.img}" alt="${m.imgAlt}" loading="lazy" decoding="async"><figcaption>${m.imgCaption}</figcaption></figure>`
     : "";
@@ -52,7 +53,7 @@ function showHero(m) {
     ? `<a class="hero-source" href="${m.visualSource}" target="_blank" rel="noopener noreferrer">Imagen complementaria ↗</a>`
     : "");
 
-  $("hero-detail").innerHTML = `
+  target.innerHTML = `
     <div class="hero-detail-content">
       <header class="hero-detail-header">
         <div><span class="hero-detail-eyebrow${m.status ? " is-active" : ""}">${m.w} · ${m.status || "MISIÓN"}</span><h3 id="hero-detail-title">${m.n}</h3></div>
@@ -79,15 +80,48 @@ function showHero(m) {
     </div>`;
 }
 
+const isMobile = () => window.matchMedia("(max-width: 900px)").matches;
+
+function closeAllMobilePanels() {
+  document.querySelectorAll(".hero-mobile-panel").forEach(p => p.remove());
+  document.querySelectorAll("#heroes .hero-item").forEach(item => {
+    item.classList.remove("is-expanded-mobile");
+    item.classList.remove("is-selected");
+    item.setAttribute("aria-pressed", "false");
+    item.setAttribute("aria-expanded", "false");
+  });
+}
+
 document.querySelectorAll("#heroes .hero-item").forEach(button => {
   button.onclick = () => {
-    document.querySelectorAll("#heroes .hero-item").forEach(item => {
-      const selected = item === button;
-      item.classList.toggle("is-selected", selected);
-      item.setAttribute("aria-pressed", selected ? "true" : "false");
-    });
-    showHero(H[+button.dataset.hero]);
+    const alreadyOpen = button.classList.contains("is-expanded-mobile");
+
+    if (isMobile()) {
+      closeAllMobilePanels();
+      if (alreadyOpen) return;
+
+      button.classList.add("is-selected", "is-expanded-mobile");
+      button.setAttribute("aria-pressed", "true");
+      button.setAttribute("aria-expanded", "true");
+
+      const panel = document.createElement("div");
+      panel.className = "hero-mobile-panel";
+      panel.setAttribute("aria-live", "polite");
+      button.insertAdjacentElement("afterend", panel);
+      showHero(H[+button.dataset.hero], panel);
+    } else {
+      document.querySelectorAll("#heroes .hero-item").forEach(item => {
+        const selected = item === button;
+        item.classList.toggle("is-selected", selected);
+        item.setAttribute("aria-pressed", selected ? "true" : "false");
+      });
+      showHero(H[+button.dataset.hero]);
+    }
   };
+});
+
+window.addEventListener("resize", () => {
+  if (!isMobile()) closeAllMobilePanels();
 });
 
 /* Renderizado de Línea de tiempo, Ciencia, Medios y Créditos */

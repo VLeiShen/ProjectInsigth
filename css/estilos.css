@@ -2104,12 +2104,20 @@ body.game-open {
   text-align: center;
 }
 
-/* Juego 5: Misión Luna (juego 3D embebido en un iframe) */
-#gbody .luna-frame {
+/* Juegos externos embebidos: ventana ampliada para que el HUD no tape el juego */
+.game-window.is-embed {
+  width: min(1080px, calc(100vw - 32px));
+}
+
+.game-window.is-embed .game-window-body {
+  padding: 8px;
+}
+
+#gbody .game-embed {
   display: block;
   width: 100%;
-  height: min(calc(100dvh - 240px), 620px);
-  min-height: 300px;
+  height: min(calc(100dvh - 200px), 720px);
+  min-height: 320px;
   border: 1px solid rgba(212, 184, 116, .25);
   border-radius: 3px;
   background: #050510;
@@ -3579,77 +3587,6 @@ body.game-open .oppi {
   }
 }
 
-/* ===== Mini-quiz ===== */
-#gbody #qbox .quiz-q {
-  margin: 6px auto 14px;
-  max-width: 46ch;
-  color: #f0eee8;
-  font-size: .98rem;
-  font-weight: 700;
-  line-height: 1.45;
-  text-align: center;
-}
-
-#gbody #qbox .quiz-options {
-  display: grid;
-  max-width: 420px;
-  gap: 9px;
-  margin: 0 auto;
-}
-
-#gbody #qbox .quiz-opt {
-  min-height: 46px;
-  padding: 10px 15px;
-  border: 1px solid rgba(212, 184, 116, .3);
-  border-radius: 8px;
-  background: rgba(212, 184, 116, .06);
-  color: #eae7dd;
-  font: inherit;
-  font-weight: 600;
-  text-align: left;
-  cursor: pointer;
-  transition: border-color .18s ease, background .18s ease, transform .18s ease;
-}
-
-#gbody #qbox .quiz-opt:hover:not(:disabled) {
-  border-color: rgba(212, 184, 116, .62);
-  background: rgba(212, 184, 116, .13);
-  transform: translateY(-1px);
-}
-
-#gbody #qbox .quiz-opt:disabled {
-  cursor: default;
-}
-
-#gbody #qbox .quiz-opt.is-ok {
-  border-color: #3ddc84;
-  background: rgba(61, 220, 132, .16);
-  color: #d9ffe9;
-}
-
-#gbody #qbox .quiz-opt.is-no {
-  border-color: #ff5a4d;
-  background: rgba(255, 90, 77, .14);
-  color: #ffd9d5;
-}
-
-#gbody #qbox .quiz-feedback {
-  max-width: 44ch;
-  margin: 14px auto 0;
-  color: #bcb7a9;
-  font-size: .82rem;
-  line-height: 1.55;
-  text-align: center;
-}
-
-#gbody #qbox .quiz-feedback b {
-  color: #f0d894;
-}
-
-#gbody #qbox .quiz-feedback .btn {
-  margin-top: 11px;
-}
-
 /* --- Rompecabezas 4x4 --- */
 #gbody .puz-grid {
   display: grid;
@@ -3740,7 +3677,6 @@ body.game-open .oppi {
   .oppi-body svg,
   .oppi,
   .sound-toggle,
-  #gbody #qbox .quiz-opt,
   .oppi.saltando .oppi-body,
   .guide-focus {
     transition: none;

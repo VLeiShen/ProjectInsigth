@@ -235,63 +235,6 @@ var SC_EN = [
   }
 ];
 
-var QUIZ_EN = [
-  {
-    q: "In what year did Apollo 11 reach the Moon?",
-    o: ["1977", "1969", "2004"],
-    a: 1,
-    tip: "On July 20, 1969, in the Sea of Tranquility."
-  },
-  {
-    q: "Who was the chief engineer of the Apollo 11 lunar module?",
-    o: ["Thomas J. Kelly", "Ferenc Pavlics", "Edward Stone"],
-    a: 0,
-    tip: "Thomas J. Kelly led its design at Grumman."
-  },
-  {
-    q: "For how many days was Opportunity's mission originally planned?",
-    o: ["2 years", "15 years", "90 days"],
-    a: 2,
-    tip: "It was planned for 90 Martian days and worked for almost 15 years."
-  },
-  {
-    q: "How many flights did the Ingenuity helicopter end up making?",
-    o: ["5", "72", "12"],
-    a: 1,
-    tip: "Five flights were expected and it achieved 72."
-  },
-  {
-    q: "What nickname did the spherules that Opportunity found receive?",
-    o: ["Martian blueberries", "Red marbles", "Ice pearls"],
-    a: 0,
-    tip: "They are called «Martian blueberries» and are clues to ancient water."
-  },
-  {
-    q: "What did Apollo 11 leave on the Moon to measure its distance from Earth?",
-    o: ["A telescope", "A giant radio", "A laser reflector"],
-    a: 2,
-    tip: "A laser is aimed at it and the time it takes to return is measured."
-  },
-  {
-    q: "Who led the Voyager project for decades?",
-    o: ["Steve Squyres", "Edward Stone", "MiMi Aung"],
-    a: 1,
-    tip: "Edward Stone was chief scientist of the Voyager project at JPL."
-  },
-  {
-    q: "In what year did Voyager 1 cross the heliopause?",
-    o: ["2012", "1969", "2024"],
-    a: 0,
-    tip: "In 2012 it entered interstellar space."
-  },
-  {
-    q: "How many lunar rovers remain abandoned on the Moon?",
-    o: ["1", "10", "3"],
-    a: 2,
-    tip: "Those of Apollo 15, 16 and 17 remained."
-  }
-];
-
 var SABIAS_EN = [
   "Astronauts' footprints are still on the Moon because there is almost no wind or rain there.",
   "Opportunity was designed for 90 days, but it explored Mars for almost 15 years.",

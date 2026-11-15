@@ -97,8 +97,9 @@ function g3D() {
   gd.receiveShadow = true;
   sc.add(gd);
 
-  /* Rocas y dunas decorativas: dan profundidad y sombras sin interferir en el juego */
-  var rockMat = new T.MeshPhongMaterial({ color: 0x6b3320, shininess: 6 });
+  /* Rocas y dunas decorativas: dan profundidad y sombras. Avanzan con el suelo
+     para no quedar "flotando" mientras el terreno se desplaza. */
+  var DECO = [], rockMat = new T.MeshPhongMaterial({ color: 0x6b3320, shininess: 6 });
   var rockMat2 = new T.MeshPhongMaterial({ color: 0x8a4527, shininess: 6 });
   for (var r = 0; r < 30; r++) {
     var sgn = Math.random() < .5 ? -1 : 1;
@@ -108,14 +109,20 @@ function g3D() {
     rk.scale.y = .5 + Math.random() * .4;
     rk.castShadow = true;
     rk.receiveShadow = true;
+    rk.userData.zmin = -80;
+    rk.userData.zmax = 8;
     sc.add(rk);
+    DECO.push(rk);
   }
   var duneMat = new T.MeshPhongMaterial({ color: 0x9c5430, shininess: 2 });
   for (var d = 0; d < 6; d++) {
     var dn = new T.Mesh(new T.DodecahedronGeometry(6 + Math.random() * 6, 0), duneMat);
     dn.position.set((Math.random() < .5 ? -1 : 1) * (14 + Math.random() * 22), -1.5, -55 - Math.random() * 45);
     dn.scale.y = .28;
+    dn.userData.zmin = -100;
+    dn.userData.zmax = -55;
     sc.add(dn);
+    DECO.push(dn);
   }
 
   /* Rover: construido con piezas, con sombras y materiales con brillo */
@@ -256,6 +263,11 @@ function g3D() {
     rv.rotation.z = dx * .04;
     WH.forEach(function(w) { w.rotation.x -= sp * dt * 2; });
     tex.offset.y += sp * dt * .2;
+    /* Las decoraciones avanzan con el suelo y reaparecen al pasar la cámara */
+    DECO.forEach(function(o) {
+      o.position.z += sp * dt;
+      if (o.position.z > o.userData.zmax) o.position.z -= (o.userData.zmax - o.userData.zmin);
+    });
     if (hit > 0) hit -= dt;
     var shake = hit > 0 ? hit * .02 : 0;
     rv.position.y = hit > 0 ? Math.abs(Math.sin(hit)) * .15 : 0;

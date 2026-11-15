@@ -234,64 +234,6 @@ var SC = [
   }
 ];
 
-/* ===== MINI-QUIZ: preguntas rápidas para niños. a = índice de la respuesta correcta ===== */
-var QUIZ = [
-  {
-    q: "¿En qué año llegó Apollo 11 a la Luna?",
-    o: ["1977", "1969", "2004"],
-    a: 1,
-    tip: "El 20 de julio de 1969, en el Mar de la Tranquilidad."
-  },
-  {
-    q: "¿Quién fue el ingeniero jefe del módulo lunar de Apollo 11?",
-    o: ["Thomas J. Kelly", "Ferenc Pavlics", "Edward Stone"],
-    a: 0,
-    tip: "Thomas J. Kelly dirigió su diseño en Grumman."
-  },
-  {
-    q: "¿Para cuántos días se planeó la misión de Opportunity?",
-    o: ["2 años", "15 años", "90 días"],
-    a: 2,
-    tip: "Se planeó para 90 días marcianos y trabajó casi 15 años."
-  },
-  {
-    q: "¿Cuántos vuelos llegó a hacer el helicóptero Ingenuity?",
-    o: ["5", "72", "12"],
-    a: 1,
-    tip: "Se esperaban 5 vuelos y logró 72."
-  },
-  {
-    q: "¿Qué apodo recibieron las esférulas que encontró Opportunity?",
-    o: ["Arándanos marcianos", "Canicas rojas", "Perlas de hielo"],
-    a: 0,
-    tip: "Se llaman «arándanos marcianos» y son pistas de agua antigua."
-  },
-  {
-    q: "¿Qué dejó Apollo 11 en la Luna para medir su distancia con la Tierra?",
-    o: ["Un telescopio", "Una radio gigante", "Un reflector láser"],
-    a: 2,
-    tip: "Se le apunta un láser y se mide lo que tarda en volver."
-  },
-  {
-    q: "¿Quién dirigió el proyecto Voyager durante décadas?",
-    o: ["Steve Squyres", "Edward Stone", "MiMi Aung"],
-    a: 1,
-    tip: "Edward Stone fue científico jefe del proyecto Voyager en JPL."
-  },
-  {
-    q: "¿En qué año cruzó Voyager 1 la heliopausa?",
-    o: ["2012", "1969", "2024"],
-    a: 0,
-    tip: "En 2012 entró en el espacio interestelar."
-  },
-  {
-    q: "¿Cuántos rovers lunares siguen abandonados en la Luna?",
-    o: ["1", "10", "3"],
-    a: 2,
-    tip: "Quedaron los de Apollo 15, 16 y 17."
-  }
-];
-
 /* ===== ¿SABÍAS QUE…? datos curiosos que va contando Oppi ===== */
 var SABIAS = [
   "Las huellas de los astronautas siguen en la Luna porque allí casi no hay viento ni lluvia.",

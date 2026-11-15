@@ -200,7 +200,7 @@ const V = [
 function renderNav() {
   const h = location.hash.slice(1) || "portada";
   $("nav").innerHTML =
-    `<div class="nav-brand"><a href="#portada" aria-label="${t("brandHome")}"><span class="nav-brand-mark" aria-hidden="true">✦</span><span>${t("brand")}</span></a></div>` +
+    `<div class="nav-brand"><a href="#portada" aria-label="${t("brandHome")}"><span class="nav-brand-mark" aria-hidden="true"><img class="nav-brand-logo" src="img/Logo/Logo.png" alt=""></span><span>${t("brand")}</span></a></div>` +
     V.filter(v => v[0] !== "portada")
       .map(v => `<a href="#${v[0]}"${v[0] === h ? ' class="on" aria-current="page"' : ""}><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${v[2]}</svg><span>${t(v[1])}</span></a>`)
       .join("") +

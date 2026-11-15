@@ -102,8 +102,8 @@ var I18N = {
     nasaNote: "Todos los recursos provienen de la NASA y se usan con su autorización. Verifica cada dato y crédito en las fuentes oficiales.",
 
     /* Navegación */
-    brand: "SPACE TRACE",
-    brandHome: "Space Trace, portada",
+    brand: "SPACE TRACE-UPRIT",
+    brandHome: "Space Trace-UPRIT, portada",
     navHeroes: "Héroes",
     navTime: "Tiempo",
     navSci: "Ciencia",
@@ -266,8 +266,8 @@ var I18N = {
     nasaResources: "NASA resources",
     nasaNote: "All resources come from NASA and are used with authorization. Verify every fact and credit in the official sources.",
 
-    brand: "SPACE TRACE",
-    brandHome: "Space Trace, home",
+    brand: "SPACE TRACE-UPRIT",
+    brandHome: "Space Trace-UPRIT, home",
     navHeroes: "Heroes",
     navTime: "Time",
     navSci: "Science",

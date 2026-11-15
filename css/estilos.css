@@ -2104,6 +2104,17 @@ body.game-open {
   text-align: center;
 }
 
+/* Juego 5: Misión Luna (juego 3D embebido en un iframe) */
+#gbody .luna-frame {
+  display: block;
+  width: 100%;
+  height: min(calc(100dvh - 240px), 620px);
+  min-height: 300px;
+  border: 1px solid rgba(212, 184, 116, .25);
+  border-radius: 3px;
+  background: #050510;
+}
+
 #gbody #rc {
   width: min(100%, 340px) !important;
   margin: 4px auto 10px !important;

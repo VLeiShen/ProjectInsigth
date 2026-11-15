@@ -1,5 +1,5 @@
 /* ===== Controlador general de la sección de juegos y sonido ===== */
-const col = { rover: false, det: false, quiz: false, puz: false };
+const col = { rover: false, det: false, quiz: false, puz: false, luna: false };
 let cur = null,
     AC = null,
     GLB = "",
@@ -7,13 +7,13 @@ let cur = null,
     master = null,
     sndMuted = false;
 
-const GAME_KEYS = { rover: "game1", det: "game2", quiz: "game3", puz: "game4" };
+const GAME_KEYS = { rover: "game1", det: "game2", quiz: "game3", puz: "game4", luna: "game5" };
 const tituloJuego = (g) => (GAME_KEYS[g] ? t(GAME_KEYS[g]) : t("gameModalTitle"));
 
 document.body.appendChild($("gm"));
 
 function upd() {
-  $("col").textContent = `${t("collection")} 🚙 ${col.rover ? "✅" : "⬜"}   🔎 ${col.det ? "✅" : "⬜"}   🧠 ${col.quiz ? "✅" : "⬜"}   🧩 ${col.puz ? "✅" : "⬜"}`;
+  $("col").textContent = `${t("collection")} 🚙 ${col.rover ? "✅" : "⬜"}   🔎 ${col.det ? "✅" : "⬜"}   🧠 ${col.quiz ? "✅" : "⬜"}   🧩 ${col.puz ? "✅" : "⬜"}   🌕 ${col.luna ? "✅" : "⬜"}`;
 }
 
 function leave() {
@@ -43,9 +43,25 @@ function launch(game) {
   if (game === "rover") gRover();
   else if (game === "det") gDet();
   else if (game === "puz") gPuzzle();
+  else if (game === "luna") gLuna();
   else gQuiz();
   $("game-window").focus();
 }
+
+/* ===== Juego 5: Misión Luna (juego 3D externo embebido) ===== */
+function gLuna() {
+  $("gbody").innerHTML = '<iframe class="luna-frame" src="misionluna.html" title="' + t("game5") + '" allow="autoplay" loading="eager"></iframe>';
+  const fr = $("gbody").querySelector("iframe");
+  if (fr) fr.onload = () => { try { fr.focus(); } catch (e) {} };
+  cur = function () { $("gbody").innerHTML = ""; };
+}
+
+window.addEventListener("message", e => {
+  if (e && e.data && e.data.type === "luna-win") {
+    col.luna = true;
+    upd();
+  }
+});
 
 document.querySelectorAll(".g").forEach(b => {
   b.onclick = () => {

@@ -35,8 +35,11 @@ var H = [
     imgAlt: "Vehículo lunar LRV de Apollo 15 sobre la superficie de la Luna",
     imgCaption: "LRV en Hadley-Apennine · AS15-88-11901",
     source: "https://images.nasa.gov/details/as15-88-11901",
-    visual: "",
-    visualLabel: "Figura clave · NASA/MSFC",
+    visual: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Pavlics_Ferenc_Budapest_2010.JPG/960px-Pavlics_Ferenc_Budapest_2010.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    visualAlt: "Retrato de Ferenc Pavlics en Budapest en 2010",
+    visualLabel: "Figura clave · diseño del LRV",
+    visualCaption: "Ferenc Pavlics, Budapest (2010) · Both Előd · CC BY-SA 3.0",
+    visualSource: "https://commons.wikimedia.org/wiki/File:Pavlics_Ferenc_Budapest_2010.JPG",
     personInitials: "FP",
     cred: "Máquina: NASA · Apollo 15 LRV"
   },
@@ -95,8 +98,11 @@ var H = [
     imgAlt: "Ilustración de Voyager 1 viajando por el espacio interestelar",
     imgCaption: "Concepto artístico de Voyager en el espacio interestelar · PIA17046",
     source: "https://images.nasa.gov/details/PIA17046",
-    visual: "",
+    visual: "https://images-assets.nasa.gov/image/201309120005HQ/201309120005HQ~medium.jpg",
+    visualAlt: "Edward Stone habla en una rueda de prensa de NASA sobre Voyager 1 en 2013",
     visualLabel: "Figura clave · proyecto Voyager",
+    visualCaption: "Edward Stone en una rueda de prensa sobre Voyager · NASA/Carla Cioffi (2013)",
+    visualSource: "https://images.nasa.gov/details/201309120005HQ",
     personInitials: "ES",
     cred: "NASA/JPL-Caltech · Voyager 1"
   }
